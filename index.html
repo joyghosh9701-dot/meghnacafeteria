@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelSpark Restaurant Clone</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #FFAA00; /* Orange/Yellow tone */
+            --text-dark: #222222;
+            --text-gray: #666666;
+            --bg-light: #ffffff;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- Header & Hero Section --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Yellow Background Shape */
+        .hero-bg-shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background-color: var(--primary-color);
+            border-bottom-left-radius: 400px;
+            z-index: -1;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .logo i { color: var(--primary-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .nav-icons i {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        /* Hero Content */
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 50px 8%;
+        }
+
+        .hero-text {
+            width: 45%;
+        }
+        .hero-text span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin: 15px 0;
+        }
+        .hero-text h1 span { color: var(--primary-color); }
+        .hero-text p {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .btn {
+            background-color: var(--primary-color);
+            color: #fff; /* Button text white? Image shows orange bg, maybe dark text or white */
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero-image {
+            width: 50%;
+            position: relative;
+            text-align: center;
+        }
+        .hero-image .main-dish {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        /* Floating small images mimicking the design */
+        .floating-dish {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+        .f1 { top: 0; right: 20px; }
+        .f2 { bottom: 50px; right: 50px; }
+        .f3 { bottom: 0; left: 80px; }
+
+        /* --- Sections General --- */
+        section {
+            padding: 60px 8%;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+        .section-title span { color: var(--primary-color); }
+
+        /* --- About Section --- */
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .about-img-container {
+            flex: 1;
+            position: relative;
+        }
+        /* Orange blob behind about image */
+        .about-bg {
+            background-color: var(--primary-color);
+            width: 80%;
+            height: 300px;
+            border-radius: 20px 100px 20px 20px;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            z-index: -1;
+        }
+        .about-dish {
+            width: 80%;
+            margin-left: 20px;
+            border-radius: 50%;
+        }
+        .ketchup-bottle {
+            position: absolute;
+            bottom: -20px;
+            left: -10px;
+            height: 150px;
+            width: auto;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+        .about-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .about-text span { color: var(--primary-color); }
+        .about-text p {
+            color: var(--text-gray);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* --- Popular Food Section --- */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .food-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .food-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            object-fit: cover;
+        }
+        .food-card h3 { font-size: 18px; margin-bottom: 5px; }
+        .stars { color: #FFD700; font-size: 12px; margin-bottom: 15px; }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .price { font-weight: 700; }
+        .add-btn {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- Why Choose Us --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 15px;
+        }
+        .feature-card:nth-child(2) {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Shadow for center card */
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #FFF8E1; /* Light yellow bg for icon */
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+        .feature-card h3 { font-size: 18px; margin-bottom: 10px; }
+        .feature-card p { font-size: 13px; color: var(--text-gray); line-height: 1.6; }
+
+        /* --- Testimonials --- */
+        .testimonial-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .testimonial-text {
+            width: 45%;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .user-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .quote {
+            font-style: italic;
+            color: var(--text-gray);
+            font-size: 14px;
+            margin: 15px 0 20px;
+        }
+        .nav-arrows i {
+            margin-right: 15px;
+            color: var(--text-gray);
+            cursor: pointer;
+        }
+        .nav-arrows i:hover { color: var(--primary-color); }
+
+        .testimonial-image {
+            width: 45%;
+            position: relative;
+        }
+        .test-bg {
+            background-color: var(--primary-color);
+            width: 300px;
+            height: 300px;
+            border-radius: 50% 50% 0 0; /* Semi circleish */
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+        }
+        .test-dish {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .test-ketchup {
+            position: absolute;
+            bottom: 0;
+            right: -10px;
+            height: 120px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 8%;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 30px;
+            font-size: 13px;
+            position: relative;
+            overflow: hidden;
+        }
+        footer h4 { margin-bottom: 20px; font-size: 16px; }
+        footer ul li { margin-bottom: 10px; color: var(--text-gray); }
+        .subscribe-box {
+            position: relative;
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .subscribe-box input {
+            border: none;
+            outline: none;
+            padding: 8px 15px;
+            width: 100%;
+            border-radius: 20px;
+        }
+        .subscribe-btn {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-right: 2px;
+        }
+        
+        /* Decorative footer images */
+        .footer-decor {
+            position: absolute;
+            width: 100px;
+            opacity: 0.8;
+            z-index: -1;
+        }
+        .fd-left { bottom: -20px; left: -20px; }
+        .fd-right { bottom: -20px; right: -20px; }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; gap: 15px; }
+            .hero-bg-shape { width: 100%; height: 50%; border-radius: 0 0 50% 50%; }
+            .hero-content, .about-section, .testimonial-container, footer {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text, .hero-image, .about-text, .testimonial-text, .testimonial-image { width: 100%; }
+            .food-grid, .features-grid, footer { grid-template-columns: 1fr; }
+            .about-bg { left: 50%; transform: translateX(-50%); }
+            .ketchup-bottle { left: 10%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Hero -->
+    <div class="hero-section">
+        <div class="hero-bg-shape"></div>
+        
+        <nav>
+            <div class="logo">
+                <i class="fas fa-utensils"></i> pixelspark
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About us</a>
+                <a href="#">Menu</a>
+                <a href="#">Testimonials</a>
+                <a href="#">Contact us</a>
+            </div>
+            <div class="nav-icons">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <span>Restaurant</span>
+                <h1>We Serve <br> Delicious <span>Food</span></h1>
+                <p>Keep it easy with these simple but delicious recipes. From make-ahead lunches and midweek meals to fuss-free sides.</p>
+                <button class="btn">Get started</button>
+            </div>
+            <div class="hero-image">
+                <!-- Replace src with actual kebab image -->
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Kebab Plate" class="main-dish">
+                <!-- Decorative small images -->
+                <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=100" class="floating-dish f1">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=100" class="floating-dish f2">
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us -->
+    <section class="about-section">
+        <div class="about-img-container">
+            <div class="about-bg"></div>
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" alt="Salad" class="about-dish">
+            <img src="https://pngimg.com/uploads/ketchup/ketchup_PNG13.png" alt="Ketchup" class="ketchup-bottle">
+        </div>
+        <div class="about-text">
+            <h2>About <span>Us</span></h2>
+            <p>Keep healthy food readily available. When you get hungry, you're likely to eat the first thing you see on the counter. Keep healthy food readily available.</p>
+            <button class="btn-outline">View more</button>
+        </div>
+    </section>
+
+    <!-- Popular Food -->
+    <section>
+        <h2 class="section-title">Most Popular <span>Food</span></h2>
+        <div class="food-grid">
+            <!-- Card 1 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?w=200" alt="Breakfast">
+                <h3>Breakfast food</h3>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="card-footer">
+                    <span class="price">$120.4</span>
+                    <button class="add-btn">Add to cart</button>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=200" alt="Lunch">
+                <h3>Lunch food</h3>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="card-footer">
+                    <span class="price">$220.4</span>
+                    <button class="add-btn">Add to cart</button>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=200" alt="Dinner">
+                <h3>Dinner food</h3>
+                <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="card-footer">
+                    <span class="price">$250.4</span>
+                    <button class="add-btn">Add to cart</button>
+                </div>
+            </div>
+        </div>
+        <!-- Pagination dots imitation -->
+        <div style="text-align:center; margin-top:30px; color:var(--primary-color);">
+            <i class="fas fa-circle" style="font-size:10px;"></i>
+            <i class="far fa-circle" style="font-size:10px;"></i>
+            <i class="far fa-circle" style="font-size:10px;"></i>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section>
+        <h2 class="section-title">Why choose our <span>Food</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Quality Food</h3>
+                <p>Keep healthy food readily available. When you get hungry you're more likely to eat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-hamburger"></i></div>
+                <h3>Super Taste</h3>
+                <p>Keep healthy food restate available. When you get hungry you're more likely to eat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-truck"></i></div>
+                <h3>Fast Delivery</h3>
+                <p>Keep healthy food readily available. When you get hungry you're more likely to eat.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section>
+        <h2 class="section-title">Customers <span>Say</span></h2>
+        <div class="testimonial-container">
+            <div class="testimonial-text">
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="user-img">
+                    <div>
+                        <h3>Mary Lukach</h3>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p class="quote">"Keep healthy food readily available. When you get hungry, you're more likely to eat Keep healthy food readily available."</p>
+                <div class="nav-arrows">
+                    <i class="fas fa-arrow-left"></i>
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <!-- Small avatars below -->
+                <div style="margin-top:20px; display:flex; gap:10px;">
+                     <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:30px; height:30px; border-radius:50%;">
+                     <img src="https://randomuser.me/api/portraits/women/32.jpg" style="width:30px; height:30px; border-radius:50%;">
+                     <i class="fas fa-arrow-right" style="margin-top:8px; color:#ccc;"></i>
+                </div>
+            </div>
+            <div class="testimonial-image">
+                <div class="test-bg"></div>
+                <img src="https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=500" alt="Dish" class="test-dish">
+                <img src="https://pngimg.com/uploads/ketchup/ketchup_PNG13.png" alt="Ketchup" class="test-ketchup">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            <div class="logo" style="margin-bottom:20px;">
+                <i class="fas fa-utensils"></i> pixelspark
+            </div>
+            <!-- Decorative footer images imitation -->
+             <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=100" class="footer-decor fd-left">
+        </div>
+        <div>
+            <h4>Opening Hours</h4>
+            <ul>
+                <li>Mon-Fri: 09:00 AM - 06:00 PM</li>
+                <li>Saturday: 09:00 AM - 04:00 PM</li>
+                <li>Sunday: Closed</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contact us</h4>
+            <ul>
+                <li>543 Country Club Ave</li>
+                <li>NC 27587, London, UK</li>
+                <li>+1259 745 1234</li>
+                <li>email@pixelspark.com</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Subscribe Us</h4>
+            <div class="subscribe-box">
+                <input type="email">
+                <button class="subscribe-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=100" class="footer-decor fd-right">
+        </div>
+    </footer>
+
+</body>
+</html>
